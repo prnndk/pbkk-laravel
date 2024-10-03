@@ -15,7 +15,7 @@ class PostController extends Controller
     {
         $data = Post::all();
         return view('welcome', [
-            'data' => $data
+            'posts' => $data
         ]);
     }
 
@@ -40,7 +40,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('article',compact('post'));
     }
 
     /**
