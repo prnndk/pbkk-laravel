@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        DB::beginTransaction();
+        try{
+         User::factory(50)->create();
+         $this->call([
+             ContactSeeder::class,
+             PortofolioSeeder::class,
+             PostSeeder::class,
+         ]);
+         DB::commit();
+        }catch(\Throwable $th){
+            DB::rollBack();
+            throw $th;
+        }
     }
 }
