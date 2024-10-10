@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::filter(request(['search']))->latest()->get();
+        $data = Post::filter(request(['search']))->latest()->paginate(10)->withQueryString();
         return view('welcome', [
             'posts' => $data
         ]);

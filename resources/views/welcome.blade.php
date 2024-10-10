@@ -2,7 +2,7 @@
     <x-search-bar/>
 
     <h1 class="text-3xl mb-5 font-bold tracking-tight">Data postingan terbaru</h1>
-    {{-- {{ $posts->links() }} --}}
+    {{ $posts->links() }}
 
         <div class="grid grid-cols-1 gap-3 md:grid-cols-3 my-5">
     @foreach($posts as $post)
